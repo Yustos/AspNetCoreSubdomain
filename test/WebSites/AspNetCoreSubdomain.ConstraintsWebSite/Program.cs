@@ -19,6 +19,11 @@ namespace AspNetCoreSubdomain.ConstraintsWebSite
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddDebug();
+                })
                 .UseStartup<Startup>()
                 .Build();
     }

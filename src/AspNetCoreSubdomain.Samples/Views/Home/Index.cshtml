@@ -1,15 +1,18 @@
 ﻿@model string
 @{
     ViewData["Title"] = "Home Page";
-    var bootstrapBtn = new { @class = "btn btn-primary btn-lg btn-block" };
 }
 
 @Html.Partial("_NavPills")
 @Html.Partial("_DisplayModel", Model)
 <div class="container-fluid">
     <div class="row">
+        @Html.Raw(User.Identity.Name)
+    </div>
+    <div class="row">
         <div class="col-xs-12">
             @Html.Partial("Urls")
+            
         </div>
     </div>
 </div>
