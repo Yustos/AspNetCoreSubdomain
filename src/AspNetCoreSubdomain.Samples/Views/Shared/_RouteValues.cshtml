@@ -3,8 +3,11 @@
         <div class="col-xs-12">
             <div class="jumbotron">
                 <p><strong>Route values</strong></p>
+                <div>
+                    User: @Html.Raw(User.Identity.Name)
+                </div>
                 @foreach (var p in ViewContext.RouteData.Values)
-            {
+                {
                     <p>
                         @p.Key
                         <code>@p.Value</code>

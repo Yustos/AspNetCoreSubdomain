@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace AspNetCoreSubdomain.Samples
 {
@@ -20,6 +22,9 @@ namespace AspNetCoreSubdomain.Samples
         {
             // Add framework services.
             services.AddSubdomains();
+            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+                .AddNegotiate();
+            //services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -37,10 +42,10 @@ namespace AspNetCoreSubdomain.Samples
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
-                var hostnames = new[] { "localhost:54575" };
+                var hostnames = new[] { "example.com:5000" };
 
                 routes.MapSubdomainRoute(
                     hostnames,
